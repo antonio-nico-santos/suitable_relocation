@@ -1,0 +1,5 @@
+#Files to ignore
+config.py
+geopackages/
+__pycache__/
+*.gpkg
