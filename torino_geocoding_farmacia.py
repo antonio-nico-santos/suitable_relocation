@@ -19,7 +19,7 @@ data_list = []
 next_page_token = None
 
 # Parameters for query
-query = "Supermercato Torino"
+query = "Farmacia Torino"
 
 # Search 
 
@@ -27,7 +27,7 @@ query = "Supermercato Torino"
 while True:
     # At first, there is no token.
     if next_page_token:
-        # Wait 3 seconds for a new request
+        # Wait 3 seconds for a new requesto
         time.sleep(3)
         places_result = gmaps.places(query=query, page_token=next_page_token)
     else:
@@ -60,7 +60,7 @@ gpkg_file = "torino_locations.gpkg"
 gpkg = os.path.join(path_gpkg,gpkg_file)
 gdf.to_file(
     gpkg, 
-    layer='supermercato', 
+    layer='farmacia', 
     driver="GPKG", 
     mode='w'
     )

@@ -5,6 +5,7 @@ Created on Thu Jan 29 08:21:11 2026
 @author: Nico Antonio (Antonio Augusto Santos)
 """
 
+import time
 import os
 import googlemaps
 import geopandas as gpd
@@ -15,32 +16,48 @@ from shapely.geometry import Point
 API_KEY = API_KEY
 gmaps = googlemaps.Client(key=API_KEY)
 data_list = []
+next_page_token = None
 
 # Parameters for query
 query = "Asilo Nido Torino"
 
 # Search 
-places_result = gmaps.places(query=query)
+while True:
+    # At first, there is no token.
+    if next_page_token:
+        # Wait 3 seconds for a new request
+        time.sleep(4)
+        places_result = gmaps.places(query=query, page_token=next_page_token)
+    else:
+        places_result = gmaps.places(query=query)
+        
+    
 
-for place in places_result['results']:
-    place_id = place.get('place_id')
+    for place in places_result['results']:
+        place_id = place.get('place_id')
+        
+        details = gmaps.place(place_id=place_id, fields=[
+                  'website', 'formatted_phone_number']).get('result', {})
+        
+        lat = place['geometry']['location']['lat']
+        lng = place['geometry']['location']['lng']
+        
+        data_list.append({
+            'name': place.get('name'),
+            'address': place.get('formatted_address'),
+            'website': details.get('website'),
+            'phone': details.get('formatted_phone_number'),
+            'rating_note': place.get('rating', 0),
+            'num_reviews': place.get('user_ratings_total', 0),
+            'city': "Torino",
+            'geometry': Point(lng, lat)
+        })
+        
+    next_page_token = places_result.get('next_page_token')
     
-    details = gmaps.place(place_id=place_id, fields=[
-              'website', 'formatted_phone_number']).get('result', {})
-    
-    lat = place['geometry']['location']['lat']
-    lng = place['geometry']['location']['lng']
-    
-    data_list.append({
-        'name': place.get('name'),
-        'address': place.get('formatted_address'),
-        'website': details.get('website'),
-        'phone': details.get('formatted_phone_number'),
-        'rating_note': place.get('rating', 0),
-        'num_reviews': place.get('user_ratings_total', 0),
-        'city': "Torino",
-        'geometry': Point(lng, lat)
-    })
+    #If there is no other token, the loop is closed
+    if not next_page_token:
+        break
     
 #defining gdf    
 gdf = gpd.GeoDataFrame(data_list, crs="EPSG:4326")    
