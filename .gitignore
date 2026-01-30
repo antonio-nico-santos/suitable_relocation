@@ -2,4 +2,5 @@
 config.py
 geopackages/
 __pycache__/
+cache/
 *.gpkg
