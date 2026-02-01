@@ -23,3 +23,8 @@ https://www.istat.it/notizia/basi-territoriali-e-variabili-censuarie/
 *ISTAT 2025 commune limits
 EPSG:32632 (WGS84/UTM zone 32N)
 https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/
+
+**Walkways
+*Open Street Maps
+Download with the library OSMnx
+EPSG:4326 (WGS84 - geographic)
