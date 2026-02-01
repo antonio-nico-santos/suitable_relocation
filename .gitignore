@@ -3,4 +3,5 @@ config.py
 geopackages/
 __pycache__/
 cache/
+ISTAT_data/
 *.gpkg
