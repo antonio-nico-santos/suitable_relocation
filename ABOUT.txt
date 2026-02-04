@@ -4,7 +4,7 @@ Torino 1272
 
 *1. Data Retrieving
 **Services location
-* Google My places API 
+*** Google My places API 
 - Asilo nido (kindergarten)
 - Supermercato (markets)
 - Farmacia (drugstore)
@@ -13,18 +13,25 @@ Torino 1272
 EPSG:4326 (WGS84 - geographic)
 
 **Demographic information
-*ISTAT 2021 census data
+***ISTAT 2021 census data
 - Compatible Age (children and people of our age)
 - Immigrants
 EPSG:32632 (WGS84/UTM zone 32N)
 https://www.istat.it/notizia/basi-territoriali-e-variabili-censuarie/
 
 **Boundaries
-*ISTAT 2025 commune limits
+***ISTAT 2025 commune limits
 EPSG:32632 (WGS84/UTM zone 32N)
 https://www.istat.it/notizia/confini-delle-unita-amministrative-a-fini-statistici-al-1-gennaio-2018-2/
 
 **Walkways
-*Open Street Maps
+***Open Street Maps
 Download with the library OSMnx
-EPSG:4326 (WGS84 - geographic)
+
+**Real Estate Market Prices
+***Agenzia delle Entrate
+https://www1.agenziaentrate.gov.it/servizi/geopoi_omi/index.php
+Ano 2025/ 1º semestre
+EPSG:32632 (WGS84/UTM zone 32N)
+https://www.immobiliare.it/mercato-immobiliare/piemonte/pinerolo/
+https://www.immobiliare.it/mercato-immobiliare/piemonte/torino/
