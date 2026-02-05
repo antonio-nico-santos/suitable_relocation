@@ -4,4 +4,5 @@ geopackages/
 __pycache__/
 cache/
 ISTAT_data/
+outputs/
 *.gpkg
