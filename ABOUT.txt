@@ -35,3 +35,8 @@ Ano 2025/ 1º semestre
 EPSG:32632 (WGS84/UTM zone 32N)
 https://www.immobiliare.it/mercato-immobiliare/piemonte/pinerolo/
 https://www.immobiliare.it/mercato-immobiliare/piemonte/torino/
+
+**Highways
+***Open Street Maps
+Download with the library OSMnx
+Processing with QNEAT3
