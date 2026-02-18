@@ -1,5 +1,6 @@
 #Files to ignore
 config.py
+gpkg_to_db.txt
 geopackages/
 __pycache__/
 cache/
