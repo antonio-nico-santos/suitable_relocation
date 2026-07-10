@@ -1,5 +1,8 @@
 ALTER TABLE torino.asili_nido
-    ADD COLUMN omi_zone VARCHAR(50),
+	ADD COLUMN cost_full INTEGER,
+	ADD COLUMN cost_matut INTEGER,
+	ADD COLUMN cost_vesp INTEGER,
+    ADD COLUMN omi_zone VARCHAR(100),
 	ADD COLUMN cod_zone VARCHAR (10),
     ADD COLUMN email VARCHAR(50),
     ADD COLUMN disponibilita VARCHAR(100);
