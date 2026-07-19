@@ -11,20 +11,14 @@ import numpy as np
 from config import path_gpkg
 
 def process_osm_data():
-<<<<<<< HEAD
-    # 1. Using a shapefile o determinate ROI
-=======
-    # 1. Carico ROI e scarico dati
+
 
     roi = gpd.read_file(f"{path_gpkg}/highways.gpkg", layer="roi_highways")
     polygon = roi.geometry.union_all() 
 
     cf = '["highway"~"motorway|trunk|primary|secondary|tertiary|residential"]'
     print("Downloading data from OSM")
-<<<<<<< HEAD
-    # Setting a default Maxspeed per type of highway
-=======
-    # Download con velocità di default per i buchi
+
 
     G = ox.graph_from_polygon(polygon, custom_filter=cf, retain_all=True)
     
@@ -34,16 +28,13 @@ def process_osm_data():
     }
     G = ox.add_edge_speeds(G, hwy_speeds=hwy_speeds)
     
-<<<<<<< HEAD
-    # Transforming in GeoDataFrame (edges=True keeping the lines)
+
     gdf = ox.graph_to_gdfs(G, nodes=False, edges=True)
 
-    # 2. & 3.Cleaning attributes and keeping only one column of maxspeed
-=======
-    # Trasformazione in GeoDataFrame (edges=True mantiene le linee)
+
     gdf = ox.graph_to_gdfs(G, nodes=False, edges=True)
 
-    # 2. & 3. Pulizia e Unificazione Velocità
+
 
     print("Cleaning and adjusting speed values")
     speed_cols = [c for c in gdf.columns if 'speed' in c.lower() and 'type' not in c.lower()]
@@ -64,12 +55,9 @@ def process_osm_data():
 
     gdf['maxspeed_finale'] = gdf[speed_cols].max(axis=1).fillna(0).astype(int)
     
-<<<<<<< HEAD
-    # Selecting the desired columns - 'geometry' is essential
+
     keep_cols = ['highway', 'lanes', 'surface', 'maxspeed_finale', 'geometry']
-    # Cleaning the attributes
-=======
-    # --- PUNTO CRITICO: Mantenere 'geometry' ---
+
     keep_cols = ['highway', 'lanes', 'surface', 'maxspeed_finale', 'geometry']
     # Filtriamo solo le colonne che esistono davvero, ma geometry DEVE esserci
 
@@ -77,8 +65,7 @@ def process_osm_data():
     existing_keep = [c for c in keep_cols if c in gdf.columns]
     gdf = gdf[existing_keep].copy()
 
-<<<<<<< HEAD
-    # Cleaning index
+
     gdf = gdf.reset_index(drop=True)
 
     # 4. Converting CRS to 32632
@@ -87,8 +74,7 @@ def process_osm_data():
 
     # 5. & 6. Saving
     # Each highway by name
-=======
-    # Reset index per avere un FID pulito e rimuovere l'indice multi-livello di OSMnx
+
     gdf = gdf.reset_index(drop=True)
 
     # 4. Conversione CRS
@@ -103,12 +89,11 @@ def process_osm_data():
     
     output_path = f"{path_gpkg}/highways.gpkg"
     
-<<<<<<< HEAD
-    # Creating a merged layer for isochrome analysis
+
     gdf.to_file(output_path, layer="all_highways_merged", driver="GPKG")
     
     # Saving separate layer for each highway type
-=======
+
     # Merged layer
     gdf.to_file(output_path, layer="all_highways_merged", driver="GPKG")
     
